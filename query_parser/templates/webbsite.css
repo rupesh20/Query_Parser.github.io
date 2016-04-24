@@ -1,0 +1,60 @@
+
+/* design of website*/
+*{   
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
+
+}
+
+.container{
+	width:1000px; 
+	font-family:tahoma;
+	margin: 0px auto;
+	background-color: #cdcdcd;
+}
+.imgae{
+	float:left;
+	width:100px;
+	height:100px;
+}
+.nav_t ul li{
+	float:left;
+	padding:25px 10px;
+}
+.clear{
+	clear:both;
+}
+.main {
+	float:left;
+	width:700px;
+}
+.faltu{
+	float:left;
+	width:300px;
+}
+.last_man{
+	clear:both;
+}
+.main video{
+	width:170px;
+	padding:10px 10px;
+}
+#viedo video{
+	margin:1px;
+	padding:20px 20px;
+	float:left;
+}
+#zvideo {
+	clear:both;
+	margin:1px;
+	padding:20px 20px;
+}
+#yvideo video{
+	margin:1px;
+	padding:20px 20px;
+}
+.last_man{
+	text-align:center;
+	font:blue 2px;
+}
