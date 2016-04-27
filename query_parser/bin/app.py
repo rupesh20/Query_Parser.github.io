@@ -28,8 +28,8 @@ class index:
             return render.formtest(form)
         else:    
             var =str(form['query'].value)
-            #obj=youtube_parser.Youtube_query_search()
-            #data=obj.SearchQuery(str(form.d.query))
+            obj=youtube_parser.Youtube_query_search()
+            data=obj.SearchQuery(str(form.d.query))
             data = youtube_parser.SearchQuery(var)
             H_link=' <a href="{link}">{text}</a> '
 
