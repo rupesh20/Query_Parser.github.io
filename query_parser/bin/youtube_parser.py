@@ -8,7 +8,7 @@ import gdata.youtube.service
 def SearchQuery(searc_q):
 
 	obj_youtube=gdata.youtube.service.YouTubeService()
-	obj_youtube.developer_key='AIzaSyDhIco9O-WQkKanqV-9N3gf1c-7EfkWcdA'
+	obj_youtube.developer_key='-XXXXXX-'
 	query=gdata.youtube.service.YouTubeVideoQuery()
 	query.vq=searc_q
 	
