@@ -4,7 +4,6 @@ from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 import sys
 import json
-#youtube api key=AIzaSyDhIco9O-WQkKanqV-9N3gf1c-7EfkWcdA
 
 reload(sys) # system unicode and encoding checking k liye hai 
 
