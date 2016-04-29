@@ -1,46 +1,46 @@
-#!/usr/bin/python
-from apiclient.discovery import build
+import web
+import os
 from apiclient.errors import HttpError
-from oauth2client.tools import argparser
-import sys
-import json
 
-reload(sys) # system unicode and encoding checking k liye hai 
+import youtube_parser 
+from web import form
 
-sys.setdefaultencoding('utf8') # unicode encode codec error ko durr krdiya hai  isne
+urls=(
+    '/','index'
+)
 
-api_key='-XXXXXX-'# meta data ko access krne k liye
+app=web.application(urls,globals())
 
-# function to search on the list of data of videos and print the results of the query passed as a arguments
-def youtube_search(var, n):
+TEMPLATES=os.path.join(os.path.dirname(__file__),'templates')
 
-	service= build('youtube','v3',developerKey=api_key)# object service of class build 
+render=web.template.render('TEMPLATES/')
 
-	search_response = service.search().list(
-			q=var,#options m s query nikal li gai hai	
-			part="id,snippet", #part mtlb kya milega hame,id/snippet
-			maxResults=n #no of results of search  
-		).execute()
-	
-	videos= [ ] #list of videos 
-	#print sys.getdefaultencoding()
-	
-	#json data dumping i the text file for thinking purpose
-	with open('1.txt','w') as outfile:
-		json.dump(search_response,outfile)
+myform=form.Form(
+    form.Textbox("query"),
+    
+        )
 
-	for search_res in search_response.get("items",[]):
-		if search_res["id"]["kind"]== "youtube#video":
-			videos.append(" %s "%(search_res["id"]["videoId"]))
+class index:
+    def GET(self):
+        form=myform()
+        return render.formtest(form)
+    def POST(self):
+        form=myform()
+        if  not form.validates():
+            return render.formtest(form)
+        else:    
+            var =str(form['query'].value)
+            #obj=youtube_parser.Youtube_query_search()
+            #data=obj.SearchQuery(str(form.d.query))
+            
+            try:
+                data=youtube_parser.youtube_search(var,1)
+                H_link=' <a href="https://www.youtube.com/watch?v={link}">{text}</a> '
+                return H_link.format(link=data[0],text='link of video ')
+            except HttpError, e:
+                print "%d err:\n %s"%(e.resp.status,e.content)
+           
 
-	return videos		
-
-"""if __name__ == '__main__':
-	argparser.add_argument("--q",help="Search term", default="Google")
-	argparser.add_argument("--max-results",help="Max results",default=25)
-	args=argparser.parse_args()
-
-	try:
-		youtube_search(args)
-	except HttpError, e:
-		print "%d err:\n %s"%(e.resp.status,e.content)"""
+if __name__ == '__main__':
+    web.internalerror=web.debugerror
+    app.run()       
